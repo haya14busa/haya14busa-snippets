@@ -126,17 +126,17 @@ options     head
       ${0}
     endfunction
 
-snippet  save_cpoptions
-abbr     let s:save_cpo = &cpo | set cpo&vim
-alias    s:save_cpo cpoptions
-options     head
-    let s:save_cpo = &cpo
-    set cpo&vim
+# snippet  save_cpoptions                      
+# abbr     let s:save_cpo = &cpo | set cpo&vim 
+# alias    s:save_cpo cpoptions                
+# options     head                             
+#     let s:save_cpo = &cpo                    
+#     set cpo&vim                              
 
-    ${0}
+#     ${0}                                     
 
-    let &cpo = s:save_cpo
-    unlet s:save_cpo
+#     let &cpo = s:save_cpo                    
+#     unlet s:save_cpo                         
 
 snippet g:loaded
 abbr    if exists('g:loaded_{plugin-name}')
@@ -226,3 +226,160 @@ snippet     p
 abbr        debug-echomsg
 options     head
   echomsg string([${0:TARGET}])
+
+
+#=======================================
+
+delete		augroup
+snippet		augroup
+abbr		augroup ... augroup END
+	augroup ${1}
+		autocmd!
+		autocmd ${0}
+	augroup END
+
+delete		cpo_save
+snippet		cpo_save #{{{
+options		head
+abbr		use cpo save
+    " Saving 'cpoptions' {{{
+    let s:save_cpo = &cpo
+    set cpo&vim
+    " }}}
+
+	${0}
+
+    " Restore 'cpoptions' {{{
+    let &cpo = s:save_cpo
+    unlet s:save_cpo
+    " }}}
+#}}}
+
+delete		load_once #{{{
+snippet		load_once
+options		head
+abbr		load once
+    " Load Once {{{
+    if exists('g:loaded_${1}')
+    finish
+    endif
+    let g:loaded_$1 = 1
+    " }}}
+#}}}
+
+snippet     plugin #{{{
+abbr        plugin
+alias       temp_plugin
+    "=============================================================================
+    " FILE: `expand("%t")`
+    " AUTHOR: haya14busa
+    " Last Change: `strftime("%d-%m-%Y")`.
+    " License: MIT license  {{{
+    "     Permission is hereby granted, free of charge, to any person obtaining
+    "     a copy of this software and associated documentation files (the
+    "     "Software"), to deal in the Software without restriction, including
+    "     without limitation the rights to use, copy, modify, merge, publish,
+    "     distribute, sublicense, and/or sell copies of the Software, and to
+    "     permit persons to whom the Software is furnished to do so, subject to
+    "     the following conditions:
+    "
+    "     The above copyright notice and this permission notice shall be included
+    "     in all copies or substantial portions of the Software.
+    "
+    "     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    "     OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    "     MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    "     IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    "     CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    "     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    " }}}
+    "=============================================================================
+    scriptencoding utf-8
+    " Load Once {{{
+    if exists('g:loaded_`expand("%:t:r")`')
+      finish
+    endif
+    let g:loaded_`expand("%:t:r")` = 1
+    " }}}
+
+    " Saving 'cpoptions' {{{
+    let s:save_cpo = &cpo
+    set cpo&vim
+    " }}}
+
+	${0}
+
+    " Restore 'cpoptions' {{{
+    let &cpo = s:save_cpo
+    unlet s:save_cpo
+    " }}}
+#}}}
+
+snippet     autoload #{{{
+abbr        autoload
+alias       temp_autoload
+    "=============================================================================
+    " FILE: `expand("%t")`
+    " AUTHOR: haya14busa
+    " Last Change: `strftime("%d-%m-%Y")`.
+    " License: MIT license  {{{
+    "     Permission is hereby granted, free of charge, to any person obtaining
+    "     a copy of this software and associated documentation files (the
+    "     "Software"), to deal in the Software without restriction, including
+    "     without limitation the rights to use, copy, modify, merge, publish,
+    "     distribute, sublicense, and/or sell copies of the Software, and to
+    "     permit persons to whom the Software is furnished to do so, subject to
+    "     the following conditions:
+    "
+    "     The above copyright notice and this permission notice shall be included
+    "     in all copies or substantial portions of the Software.
+    "
+    "     THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS
+    "     OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+    "     MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+    "     IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+    "     CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+    "     TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+    "     SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+    " }}}
+    "=============================================================================
+    scriptencoding utf-8
+    " Saving 'cpoptions' {{{
+    let s:save_cpo = &cpo
+    set cpo&vim
+    " }}}
+
+	${0}
+
+    " Restore 'cpoptions' {{{
+    let &cpo = s:save_cpo
+    unlet s:save_cpo
+    " }}}
+#}}}
+
+snippet     neoconfig #{{{
+abbr        neoconfig
+alias       nconf
+    " ${1}/${2} {{{
+    if neobundle#tap('$2')
+      " Config {{{
+      call neobundle#config({
+            \   'autoload' : {
+            \     'commands' : [
+            \       '${3}',
+            \     ],
+            \     'mappings' : [
+            \       '${4}',
+            \     ],
+            \   }
+            \ })
+      " }}}
+      function! neobundle#tapped.hooks.on_source(bundle) "{{{
+      endfunction "}}}
+      " Setting {{{
+      "}}}
+      call neobundle#untap()
+    endif
+    " }}}
+#}}}
