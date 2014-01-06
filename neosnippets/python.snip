@@ -82,6 +82,13 @@ options     head
 	if __name__ == '__main__':
 		${0:TARGET}
 
+snippet     defmain
+abbr        def main(): ...
+alias       defm
+options     head
+	def main():
+		${0:TARGET}
+
 snippet     tryexcept
 abbr        try: ... except ...: ...
 options     head
