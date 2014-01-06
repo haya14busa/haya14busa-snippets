@@ -6,10 +6,10 @@ snippet linkid
 abbr [link][id]
 options word
     [${1:#:link}][${2:id}]${3}
-snippet linkurl
-abbr [link](url)
-options word
-    [${1:#:link}](http://${2:#:url})${3}
+# snippet linkurl
+# abbr [link](url)
+# options word
+# [${1:#:link}](http://${2:#:url})${3}
 snippet linkemail
 abbr [link](email)
 options word
@@ -65,3 +65,37 @@ abbr `code`
 options word
     \`${1}\`${2}
 
+#=======================================
+snippet linkimage
+alias image
+options word
+    ![${1:#:alt}](${2:#:url})
+
+snippet linkurl
+abbr link
+options word
+    [${1:#:link}](${2:#:url})
+
+snippet h1
+alias ==
+options head
+    ${0}
+    ========================================
+
+snippet h2
+alias --
+options head
+    ${0}
+    ----------------------------------------
+
+snippet h3
+options head
+    ### ${0}
+
+snippet h4
+options head
+    #### ${0}
+
+snippet h5
+options head
+    ##### ${0}
