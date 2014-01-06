@@ -71,10 +71,18 @@ alias image
 options word
     ![${1:#:alt}](${2:#:url})
 
+snippet		image_link_paste
+abbr		![](...)
+	![${1}](`getreg('+')=='' ? '<\`2\`>' : getreg('+')`)${0}
+
 snippet linkurl
 abbr link
 options word
     [${1:#:link}](${2:#:url})
+
+snippet		link_paste
+abbr		[](...)
+	[${1}](`getreg('+')=='' ? '<\`2\`>' : getreg('+')`)${0}
 
 snippet h1
 alias ==
@@ -99,3 +107,23 @@ options head
 snippet h5
 options head
     ##### ${0}
+
+snippet		github_link
+abbr		[...](https://github.com/...)
+alias link_github
+	[${1:#:path}](https://github.com/$1)${0}
+
+snippet		github_link_paste
+abbr		[...](https://github.com/...)
+alias link_github_paste
+	[`getreg('+')=='' ? '<\`1\`>' : matchstr(getreg('+'), '^https://github.com/\zs.\+$')`](`getreg('+')=='' ? '<\`2\`>' : getreg('+')`)${0}
+
+snippet		github_haya14busa
+abbr		[...](https://github.com/haya14busa/...)
+alias link_github_haya14busa
+	[${1:#:repository}](https://github.com/haya14busa/$1)${0}
+
+snippet		twitter_user_link
+abbr		[@...](https://twitter.com/...)
+alias link_twitter
+	[@${1:#:name}](https://twitter.com/$1)${0}
