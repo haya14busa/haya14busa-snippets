@@ -40,9 +40,11 @@ options     word
     `substitute(bufname('%') =='[Command Line]' ? expand('#:t:r:r:r') : expand('%:t:r:r:r'), '\%(_\(.\)\)', '\u\1', 'g')`${0}
 
 
-snippet		MIT_License
+snippet		MIT_License #{{{
 abbr		MIT License description
 options		head
+    License: MIT license
+
 	Copyright (c) `strftime("%Y")` ${1:name}
 	
 	Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -62,6 +64,7 @@ options		head
 	TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR
 	THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 	${0}
+#}}}
 
 snippet		current_path
 options		word
