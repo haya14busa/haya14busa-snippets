@@ -13,9 +13,13 @@ options     head
 		case e${2:: Exception} => ${0}
 	}
 
-snippet     p
+snippet     println
 abbr        println()
 	println(${1})
+
+snippet     print
+abbr        print()
+	print(${1})
 
 snippet     pn
 abbr        println('name, name)
@@ -37,6 +41,158 @@ options     head
 		}
 	}
 
+snippet     object
+options     head
+	object ${1:X} {
+		${0:TARGET}
+	}
+
+snippet     should-scalatest
+options     word
+	should {
+		"${1}" in {
+			${0:TARGET}
+		}
+	}
+
+snippet     akka-actor
+options     head
+	import akka.actor.{ActorSystem, Actor, ActorLogging, Props}
+
+	object ${1:X} {
+		def props(${2}) = Props(new X($2))
+	}
+
+	class $1($2) extends Actor with ActorLogging {
+		def receive = {
+			case e =>
+				${0:TARGET:println(e)}
+		}
+	}
+
+snippet     package
+options     head
+	package `substitute(substitute(expand('%:h'), '^src/main/scala/', '', ''), '/', '.', 'g')`
+
+
+# ========================================
+snippet     if
+abbr        if (condition) {body}
+options     head
+	if (${1:#:condition}) {
+		${0:TARGET}
+	}
+
+snippet     if-inline
+abbr        if (condition) true else false
+	if (${1:#:condition}) ${1} else ${2}
+
+
+snippet     if-else
+abbr        if (condition) {body} else {}
+options     head
+	if (${1:#:condition}) {
+		${2:TARGET}
+	} else {
+		${0:TARGET}
+	}
+
+snippet     if-else-if
+abbr        if (condition) {body} else if {} else {}
+options     head
+	if (${1:#:condition}) {
+		${2:TARGET}
+	} else if {
+		${3:TARGET}
+	} else
+		${0:TARGET}
+	}
+
+snippet     while
+abbr        while (condition) {body}
+options     head
+	while (${1:#:condition}) {
+		${0:TARGET}
+	}
+
+snippet     foreach
+abbr        .foreach(arg => body)
+options     word
+	foreach(${1:#:arg} => ${0:TARGET})
+
+snippet     for
+abbr        for (arg <- args) {}
+options     head
+	for(${1:#:arg} <- ${2:#:args}) {
+		${0:TARGET}
+	}
+
+snippet     for-to
+abbr        for (arg <- from to _to) {}
+options     head
+	for(${1:#:arg} <- ${2:#:from} to ${3:#:to}) {
+		${0:TARGET}
+	}
+
+snippet     def
+abbr        def function(args) = {}
+options     head
+	def ${1:#:name}(${2:#:args}) = {
+		${0:TARGET}
+	}
+
+snippet     def-inline
+abbr        def function(args) = body
+options     head
+	def ${1:#:name}(${2:#:args}) = ${0:TARGET}
+
+
+snippet     def-type
+abbr        def function(args): Type = {}
+options     head
+	def ${1:#:name}(${2:#:args}): ${3:#:Type} = {
+		${0:TARGET}
+	}
+
+snippet     private-def
+abbr        private def function(args) = {}
+options     head
+	private def ${1:#:name}(${2:#:args}) = {
+		${0:TARGET}
+	}
+
+snippet     override-def
+abbr        override def function(args) = {}
+options     head
+	override def ${1:#:name}(${2:#:args}) = {
+		${0:TARGET}
+	}
+
+snippet     val
+abbr        val variable = expression
+options     head
+	val ${1:#:name} = ${2:#:expression}
+
+snippet     val-type
+abbr        val variable: Type = expression
+options     head
+	val ${1:#:name}: ${2:#:Type} = ${3:#:expression}
+
+snippet     var
+abbr        var variable = expression
+options     head
+	var ${1:#:name} = ${2:#:expression}
+
+snippet     var-type
+abbr        var variable: Type = expression
+options     head
+	var ${1:#:name}: ${2:#:Type} = ${3:#:expression}
+
+
+# Predef --------------------
+snippet     assert
+abbr        assert(Boolean)
+	assert(${1:#:Boolean})
+
 # scala's indent plugin doesn't work well. use hard-tab for this snippet.
 # vim: set noexpandtab :
-
