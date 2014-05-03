@@ -4,14 +4,14 @@ abbr        match {\n  case .. => ..
 		case ${1} => ${0}
 	}
 
-snippet     try
-abbr        try {} catch { case ... }
-options     head
-	try {
-		${1:TARGET}
-	} catch {
-		case e${2:: Exception} => ${0}
-	}
+# snippet     try
+# abbr        try {} catch { case ... }
+# options     head
+# 	try {
+# 		${1:TARGET}
+# 	} catch {
+# 		case e${2:: Exception} => ${0}
+# 	}
 
 snippet     println
 abbr        println()
@@ -85,7 +85,7 @@ options     head
 
 snippet     if-inline
 abbr        if (condition) true else false
-	if (${1:#:condition}) ${1} else ${2}
+	if (${1:#:condition}) ${2} else ${3}
 
 
 snippet     if-else
@@ -102,9 +102,9 @@ abbr        if (condition) {body} else if {} else {}
 options     head
 	if (${1:#:condition}) {
 		${2:TARGET}
-	} else if {
-		${3:TARGET}
-	} else
+	} else if (${3:#:condition}) {
+		${4:TARGET}
+	} else {
 		${0:TARGET}
 	}
 
@@ -154,10 +154,23 @@ options     head
 		${0:TARGET}
 	}
 
+snippet     def-inline-type
+abbr        def function(args): Type = body
+options     head
+	def ${1:#:name}(${2:#:args}): ${3:#:Type} = ${0:TARGET}
+
+
 snippet     private-def
 abbr        private def function(args) = {}
 options     head
 	private def ${1:#:name}(${2:#:args}) = {
+		${0:TARGET}
+	}
+
+snippet     private-def-type
+abbr        private def function(args): Type = {}
+options     head
+	private def ${1:#:name}(${2:#:args}): ${3:#:Type} = {
 		${0:TARGET}
 	}
 
@@ -168,6 +181,16 @@ options     head
 		${0:TARGET}
 	}
 
+snippet     override-def-type
+abbr        override def function(args): Type = {}
+options     head
+	override def ${1:#:name}(${2:#:args}): ${3:#:Type} = {
+		${0:TARGET}
+	}
+
+
+
+# val & var ----------------------------
 snippet     val
 abbr        val variable = expression
 options     head
@@ -189,10 +212,91 @@ options     head
 	var ${1:#:name}: ${2:#:Type} = ${3:#:expression}
 
 
-# Predef --------------------
+snippet     class
+options     head
+	class ${1:#:X} {
+		${0:TARGET}
+	}
+
+snippet     trait
+options     head
+	trait ${1:#:X} {
+		${0:TARGET}
+	}
+
+snippet     implicit-def
+options     head
+	implicit def ${1:#:name}(${2:#:parameter}) = ${0:TARGET}
+
+
+snippet     fliteral
+abbr        function literal
+	(${1:#:parameters}) => ${0}
+
+# try-catch-finally
+snippet     try
+abbr        try {}
+options     head
+	try {
+		${1:TARGET}
+	}
+
+snippet     catch
+abbr        catch { case ... }
+	catch {
+		case ${1} => ${0}
+	}
+
+snippet     finally
+abbr        finally { case ... }
+	finally {
+		${1:TARGET}
+	}
+
+snippet     case
+abbr        case ${1} => ${0}
+	case ${1} => ${0}
+
+# try-catch
+snippet     try-catch
+abbr        try {} catch {}
+options     head
+	try {
+		${1:TARGET}
+	} catch {
+		case ${2} => ${0}
+	}
+
+# try-finally
+snippet     try-finally
+abbr        try {} finally {}
+options     head
+	try {
+		${1:TARGET}
+	} finally {
+		${0}
+	}
+
+# try-catch-finally
+snippet     try-catch-finally
+abbr        try {} catch {} finally {}
+options     head
+	try {
+		${1:TARGET}
+	} catch {
+		case ${2} => ${3}
+	} finally {
+		${0}
+	}
+
+# Predef -------------------------------
 snippet     assert
 abbr        assert(Boolean)
 	assert(${1:#:Boolean})
+
+snippet     require
+abbr        require(Boolean)
+	require(${1:#:Boolean})
 
 # scala's indent plugin doesn't work well. use hard-tab for this snippet.
 # vim: set noexpandtab :
