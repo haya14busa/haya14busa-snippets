@@ -72,3 +72,12 @@ snippet console-log
 alias cl
 options head
   console.log(${0:TARGET});
+
+#=========================================
+
+snippet template
+alias (function
+options head
+  (function() {
+  ${0:TARGET}
+  })();
