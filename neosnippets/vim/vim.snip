@@ -1,0 +1,51 @@
+snippet     debug #{{{
+options     head
+abbr        call g:plog()
+    call Plog(${0})
+
+snippet     neoconfig #{{{
+abbr        neoconfig
+alias       nconf
+    " ${1}/${2} {{{
+    if neobundle#tap('$2')
+      " Config {{{
+      call neobundle#config({
+            \   'autoload' : {
+            \     'commands' : [
+            \       '${3}',
+            \     ],
+            \     'mappings' : [
+            \       '${4}',
+            \     ],
+            \   }
+            \ })
+      " }}}
+      function! neobundle#tapped.hooks.on_source(bundle) "{{{
+      endfunction "}}}
+      " Setting {{{
+      "}}}
+      call neobundle#untap()
+    endif
+    " }}}
+#}}}
+
+snippet     neoconfig_unite #{{{
+abbr        neoconfig_unite
+alias       nconf_unite
+    " ${1}/${2} {{{
+    if neobundle#tap('$2')
+      " Config {{{
+      call neobundle#config({
+            \   'autoload' : {
+            \     'unite_sources' : [
+            \       '$2',
+            \     ],
+            \   }
+            \ })
+      " }}}
+      call neobundle#untap()
+    endif
+    " }}}
+#}}}
+
+# vim: fdm=marker:et:ts=4:sw=4:sts=4

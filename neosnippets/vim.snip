@@ -230,14 +230,6 @@ options     head
 
 #=======================================
 
-delete		augroup
-snippet		augroup
-abbr		augroup ... augroup END
-	augroup ${1}
-		autocmd!
-		autocmd ${0}
-	augroup END
-
 delete		cpo_save
 snippet		cpo_save #{{{
 options		head
@@ -260,8 +252,11 @@ snippet		load_once
 options		head
 abbr		load once
     " Load Once {{{
+    if expand("%:p") ==# expand("<sfile>:p")
+        unlet! g:loaded_$1
+    endif
     if exists('g:loaded_${1}')
-    finish
+        finish
     endif
     let g:loaded_$1 = 1
     " }}}
@@ -297,6 +292,9 @@ alias       temp_plugin
     "=============================================================================
     scriptencoding utf-8
     " Load Once {{{
+    if expand("%:p") ==# expand("<sfile>:p")
+        unlet! g:loaded_`expand("%:t:r")`
+    endif
     if exists('g:loaded_`expand("%:t:r")`')
       finish
     endif
@@ -313,6 +311,10 @@ alias       temp_plugin
     " Restore 'cpoptions' {{{
     let &cpo = s:save_cpo
     unlet s:save_cpo
+    " }}}
+    " __END__  {{{
+    " vim: expandtab softtabstop=4 shiftwidth=4
+    " vim: foldmethod=marker
     " }}}
 #}}}
 
@@ -356,30 +358,11 @@ alias       temp_autoload
     let &cpo = s:save_cpo
     unlet s:save_cpo
     " }}}
+    " __END__  {{{
+    " vim: expandtab softtabstop=4 shiftwidth=4
+    " vim: foldmethod=marker
+    " }}}
+
+
 #}}}
 
-snippet     neoconfig #{{{
-abbr        neoconfig
-alias       nconf
-    " ${1}/${2} {{{
-    if neobundle#tap('$2')
-      " Config {{{
-      call neobundle#config({
-            \   'autoload' : {
-            \     'commands' : [
-            \       '${3}',
-            \     ],
-            \     'mappings' : [
-            \       '${4}',
-            \     ],
-            \   }
-            \ })
-      " }}}
-      function! neobundle#tapped.hooks.on_source(bundle) "{{{
-      endfunction "}}}
-      " Setting {{{
-      "}}}
-      call neobundle#untap()
-    endif
-    " }}}
-#}}}
