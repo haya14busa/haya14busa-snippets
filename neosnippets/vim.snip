@@ -119,8 +119,8 @@ abbr neobundle hooks
     unlet s:hooks
 
 snippet     autoload
-abbr        autoload func endfunc
-alias       afunction afunc
+abbr        function {directory}#{funcname}(args)
+alias       afunction afunc function_autoload
 options     head
     function! `substitute(matchstr(neosnippet#util#expand('%:p:r'), '/autoload/\zs.*$'), '/', '#', 'g')`#${1:#:func_name}(${2:#:args})
       ${0}
