@@ -298,5 +298,12 @@ snippet     require
 abbr        require(Boolean)
 	require(${1:#:Boolean})
 
+
+# Debug -------------------------------
+snippet     debug-play
+abbr        play.Logger.debug()
+	play.Logger.debug(${0})
+
+
 # scala's indent plugin doesn't work well. use hard-tab for this snippet.
 # vim: set noexpandtab :
