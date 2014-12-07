@@ -24,6 +24,7 @@ abbr        for in endfor
 options     head
     for ${1:#:var} in ${2:#:list}
       ${0:TARGET}
+      unlet $1
     endfor
 
 snippet     while
