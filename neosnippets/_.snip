@@ -84,3 +84,73 @@ options		head
     Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
 
 include _kaomoji.snip
+
+snippet     doc #{{{
+abbr        doc
+alias       temp_doc
+	*`expand("%:t")`*	description
+
+	Author  : haya14busa <hayabusa1419@gmail.com>
+	Version : 0.9.0
+	License : MIT license {{{
+
+		Copyright (c) `strftime("%Y")` haya14busa
+
+		Permission is hereby granted, free of charge, to any person obtaining
+		a copy of this software and associated documentation files (the
+		"Software"), to deal in the Software without restriction, including
+		without limitation the rights to use, copy, modify, merge, publish,
+		distribute, sublicense, and/or sell copies of the Software, and to
+		permit persons to whom the Software is furnished to do so, subject to
+		the following conditions:
+		The above copyright notice and this permission notice shall be
+		included in all copies or substantial portions of the Software.
+
+		THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND,
+		EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF
+		MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT.
+		IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY
+		CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT,
+		TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE
+		SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+	}}}
+
+	==============================================================================
+	CONTENTS				*`expand("%:t:r")`-contents*
+
+	INTRODUCTION		|`expand("%:t:r")`-introduction|
+	INSTALLATION		|`expand("%:t:r")`-installation|
+	INTERFACE		|`expand("%:t:r")`-interface|
+	Functions		|`expand("%:t:r")`-functions|
+	Changelog		|`expand("%:t:r")`-changelog|
+
+	==============================================================================
+	INTRODUCTION				*`expand("%:t:r")`-introduction*
+
+	*vim-`expand("%:t:r")`* (*`expand("%:t:r")`.vim* )
+
+	==============================================================================
+	INSTALLATION				*`expand("%:t:r")`-installation*
+
+		1. Install
+
+	==============================================================================
+	INTERFACE				*`expand("%:t:r")`-interface*
+	------------------------------------------------------------------------------
+	FUNCTIONS				*`expand("%:t:r")`-functions*
+
+	sample({path})					*`expand("%:t:r")`.sample()*
+		description
+
+
+	==============================================================================
+	CHANGELOG				 *`expand("%:t:r")`-changelog*
+
+	0.9.0	`strftime("%Y-%m-%d")`
+		- Init.
+
+	==============================================================================
+	vim:tw=78:ts=8:ft=help:norl:noet:fen:fdl=0:fdm=marker:
+
+#}}}
