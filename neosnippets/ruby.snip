@@ -162,4 +162,11 @@ abbr        for ... in ... do ... end
   for ${1} in ${2} do
     ${3:TARGET}
   end
+
+snippet     module
+abbr        module ... end
+  module ${1:#:Module_name}
+    ${2:TARGET}
+  end
+
 # vim:set et ts=2 sts=2 sw=2 tw=0:
