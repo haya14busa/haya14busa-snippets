@@ -163,4 +163,11 @@ options     head
 	def main():
 		${0:TARGET}
 
+snippet     init
+abbr        def __init__(self, ...): ...
+alias       __init__
+options     head
+	def __init__(self, ${1}):
+		${0}
+
 # vim: fdm=marker:et:ts=4:sw=4:sts=4
