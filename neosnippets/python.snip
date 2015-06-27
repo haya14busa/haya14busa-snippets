@@ -170,4 +170,35 @@ options     head
 	def __init__(self, ${1}):
 		${0}
 
+
+snippet     procon_temp
+abbr        template_procon
+alias       tp
+options     head
+	#!/usr/bin/env python
+	# -*- coding: utf-8 -*-
+	
+	
+	def solve():
+	    pass
+	
+	
+	def getinput():
+	    def getints_line():
+	        return map(int, input().split(' '))
+	    pass
+	
+	
+	def test():
+	    pass
+	
+	
+	def main():
+	    test()
+	    # print(solve(*getinput()))
+	    # print('\n'.join(map(str, solve(*getinput()))))
+	
+	if __name__ == '__main__':
+	    main()
+
 # vim: fdm=marker:et:ts=4:sw=4:sts=4
