@@ -25,6 +25,12 @@ abbr        call s:V.load('...')
 options     head
   call ${1:s:V}.load('${2:#:module_name}')
 
+snippet     vital_assert
+abbr        let s:V = vital#of('...') | let s:assert = s:V.import('ExeAssert').make()
+options     head
+  let ${1:s:V} = vital#of('${2:vital}')
+  let s:assert = $1.import('ExeAssert').make()
+
 # FAQ
 # Q. Why does this snip file has verbose prefix "vital_" for everything?
 # A. Because it's vital.vim specific but this snip is available in any vim
