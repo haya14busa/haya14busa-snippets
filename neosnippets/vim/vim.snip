@@ -368,4 +368,16 @@ abbr        let
 alias       l
     let ${1} = ${0}
 
+snippet     gassert
+options     head
+alias       assert_g
+abbr        exe g:assert.func()
+    exe g:assert.${1:equals}(${0})
+
+snippet     sassert
+options     head
+alias       assert_s
+abbr        exe s:assert.func()
+    exe s:assert.${1:equals}(${0})
+
 # vim: fdm=marker:et:ts=4:sw=4:sts=4
