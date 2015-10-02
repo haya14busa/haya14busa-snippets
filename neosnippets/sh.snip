@@ -86,4 +86,30 @@ options     head
 	echo "${0:TARGET}" 1>&2
 	exit 1
 
+
+snippet     procon_temp
+options     head
+	cat > input.txt
+	cat <<EOF >script.vim
+	function! s:main(input) abort
+		${0}
+		return a:input
+	endfunction
+
+	let s:input = getline(1, '$')
+	% delete _
+	let s:output = s:main(s:input)
+
+	put =s:output
+	1 delete _
+	write! output.txt
+	qa!
+	EOF
+
+	vim -u NONE -i NONE -N -n -e -s -S script.vim input.txt
+
+	cat output.txt
+
+	rm input.txt script.vim output.txt
+
 # vim: set noexpandtab :
