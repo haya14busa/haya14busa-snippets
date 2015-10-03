@@ -193,6 +193,9 @@ options     head
 	    def getints_line():
 	        return list(map(int, input().split(' ')))
 	
+		def getints(n):
+			return [getint() for _ in range(n)]
+	
 	    def getints_lines(n):
 	        return [getints_line() for _ in range(n)]
 	    return []
