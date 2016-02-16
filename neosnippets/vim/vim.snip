@@ -128,6 +128,15 @@ options     head
       ${0}
     endfunction
 
+snippet     dictfunction
+abbr        function {dict}.{funcname}(args)
+alias       dictfunction dfunc function_dict
+options     head
+    function! s:${1:#:func_name}(${2:#:args}) abort dict
+      ${0}
+    endfunction
+    let s:${3:#:dict}.$1 = function('$1')
+
 # snippet  save_cpoptions
 # abbr     let s:save_cpo = &cpo | set cpo&vim
 # alias    s:save_cpo cpoptions
