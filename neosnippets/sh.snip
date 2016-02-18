@@ -89,27 +89,18 @@ options     head
 
 snippet     procon_temp
 options     head
-	cat > input.txt
-	cat <<EOF >script.vim
+	vim -u NONE -i NONE -N -n -e -s -S <(cat <<EOF
 	function! s:main(input) abort
-		${0}
-		return a:input
+		return (a + b + c) . ' ' . s
 	endfunction
-
+	" echo s:main([])
+	
 	let s:input = getline(1, '$')
-	% delete _
-	let s:output = s:main(s:input)
-
-	put =s:output
+	enew
+	put =s:main(s:input)
 	1 delete _
-	write! output.txt
-	qa!
+	%print
 	EOF
-
-	vim -u NONE -i NONE -N -n -e -s -S script.vim input.txt
-
-	cat output.txt
-
-	rm input.txt script.vim output.txt
-
+	) <(cat)
 # vim: set noexpandtab :
+
