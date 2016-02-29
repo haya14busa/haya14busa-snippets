@@ -135,7 +135,7 @@ options     head
     function! s:${1:#:func_name}(${2:#:args}) abort dict
       ${0}
     endfunction
-    let s:${3:#:dict}.$1 = function('$1')
+    let s:${3:#:dict}.$1 = function('s:$1')
 
 # snippet  save_cpoptions
 # abbr     let s:save_cpo = &cpo | set cpo&vim
